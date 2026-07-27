@@ -2960,62 +2960,47 @@
 
     /* ── Contact form (client-side only) ── */
     function sendMessage() {
-
-      const name = document.getElementById("contactName").value.trim();
-      const email = document.getElementById("contactEmail").value.trim();
-      const message = document.getElementById("contactMsg").value.trim();
-      const formMsg = document.getElementById("formMsg");
+      const name = document.getElementById("contactName").value;
+      const email = document.getElementById("contactEmail").value;
+      const message = document.getElementById("contactMsg").value;
+      const status = document.getElementById("formMsg");
 
       if (!name || !email || !message) {
-        formMsg.style.display = "block";
-        formMsg.style.color = "#ff4d4d";
-        formMsg.textContent = "Please fill in all fields.";
-        return;
+          status.style.display = "block";
+          status.style.color = "red";
+          status.innerHTML = "Please fill in all fields.";
+          return;
       }
-
-      const btn = document.querySelector(".contact-form .btn");
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
       emailjs.send(
         "service_5afaatp",
-        "template_6yiyul8",
+        "template_jl74m0j",
         {
-          from_name: name,
-          from_email: email,
-          message: message
+            title: "Portfolio Website",
+            name: name,
+            email: email,
+            message: message,
+            time: new Date().toLocaleString()
         }
       )
-      .then(() => {
+      .then(function () {
+          status.style.display = "block";
+          status.style.color = "#00ff99";
+          status.innerHTML = "✅ Message sent successfully!";
 
-        formMsg.style.display = "block";
-        formMsg.style.color = "#00ff99";
-        formMsg.textContent = "✅ Message sent successfully!";
-
-        document.getElementById("contactName").value = "";
-        document.getElementById("contactEmail").value = "";
-        document.getElementById("contactMsg").value = "";
-
+          document.getElementById("contactName").value = "";
+          document.getElementById("contactEmail").value = "";
+          document.getElementById("contactMsg").value = "";
       })
-      .catch((error) => {
+      .catch(function (error) {
+          console.error(error);
 
-        console.error(error);
-
-        formMsg.style.display = "block";
-        formMsg.style.color = "#ff4d4d";
-        formMsg.textContent = "❌ Failed to send message.";
-
-      })
-      .finally(() => {
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-
+          status.style.display = "block";
+          status.style.color = "red";
+          status.innerHTML = "❌ Failed to send message.";
       });
-
     }
-
-    /* ══════════════════════════════════════════════════════════
+      /* ══════════════════════════════════════════════════════════
        IMAGE GALLERY LIGHTBOX
        openGallery(mediaEl) — reads data-images (comma-sep paths)
        and data-title from the .project-media element
