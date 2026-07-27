@@ -2960,22 +2960,59 @@
 
     /* ── Contact form (client-side only) ── */
     function sendMessage() {
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const msg = document.getElementById('contactMsg').value.trim();
-      const out = document.getElementById('formMsg');
 
-      if (!name || !email || !msg) {
-        out.style.color = '#f87171';
-        out.textContent = 'Please fill in all fields.';
-        out.style.display = 'block';
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const message = document.getElementById("contactMsg").value.trim();
+      const formMsg = document.getElementById("formMsg");
+
+      if (!name || !email || !message) {
+        formMsg.style.display = "block";
+        formMsg.style.color = "#ff4d4d";
+        formMsg.textContent = "Please fill in all fields.";
         return;
       }
-      // CHANGE: Connect this to a backend service (Formspree, EmailJS, etc.)
-      // Example with Formspree: https://formspree.io
-      out.style.color = 'var(--accent-cyan)';
-      out.textContent = '✓ Message noted! Connect a form service (Formspree / EmailJS) to enable sending.';
-      out.style.display = 'block';
+
+      const btn = document.querySelector(".contact-form .btn");
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+      emailjs.send(
+        "service_5afaatp",
+        "template_6yiyul8",
+        {
+          from_name: name,
+          from_email: email,
+          message: message
+        }
+      )
+      .then(() => {
+
+        formMsg.style.display = "block";
+        formMsg.style.color = "#00ff99";
+        formMsg.textContent = "✅ Message sent successfully!";
+
+        document.getElementById("contactName").value = "";
+        document.getElementById("contactEmail").value = "";
+        document.getElementById("contactMsg").value = "";
+
+      })
+      .catch((error) => {
+
+        console.error(error);
+
+        formMsg.style.display = "block";
+        formMsg.style.color = "#ff4d4d";
+        formMsg.textContent = "❌ Failed to send message.";
+
+      })
+      .finally(() => {
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+
+      });
+
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -3166,6 +3203,14 @@
       <p style="font-size:0.75rem;opacity:0.6;">Add your certificate image to the path set in <code>data-cert</code></p>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    emailjs.init({
+      publicKey: "afHo7lg7yK36MppdY",
+    });
+  </script>
 
 </body>
 
