@@ -1,0 +1,3172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- =============================================
+       CHANGE: Update page title here
+  ============================================= -->
+  <title>Nour Eldin Mahmoud | Mechatronics Engineer</title>
+
+  <!-- Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES (THEME)
+       Change colors here to restyle the whole site
+    ============================================================ */
+    :root {
+      --bg-dark: #050a12;
+      --bg-card: #0b1526;
+      --bg-card2: #0d1d35;
+      --accent-cyan: #00d4ff;
+      --accent-blue: #3b82f6;
+      --accent-purple: #a855f7;
+      --accent-glow: rgba(0, 212, 255, 0.15);
+      --text-primary: #e8f4fd;
+      --text-secondary: #8ba9c8;
+      --border: rgba(0, 212, 255, 0.18);
+      --nav-height: 70px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      cursor: none;
+      /* custom cursor */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================================
+       CUSTOM CURSOR
+    ============================================================ */
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+
+    #cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    #cursor-ring {
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(0, 212, 255, 0.5);
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s ease;
+    }
+
+    /* ============================================================
+       ANIMATED BACKGROUND GRID
+    ============================================================ */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 50px 50px;
+      }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.12;
+      z-index: 0;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-cyan);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-purple);
+      bottom: 10%;
+      right: -80px;
+      animation-delay: -4s;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--accent-blue);
+      top: 40%;
+      left: 30%;
+      animation-delay: -8s;
+    }
+
+    @keyframes orbFloat {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(30px, 40px) scale(1.1);
+      }
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      z-index: 100;
+      background: rgba(5, 10, 18, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 212, 255, 0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px var(--accent-cyan);
+    }
+
+    /* ============================================================
+       CHANGE: Update navigation links here
+    ============================================================ */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: color 0.3s, text-shadow 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-cyan);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--accent-cyan);
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============================================================
+       SECTION BASE
+    ============================================================ */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 8% 80px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+
+    .section-title span {
+      color: var(--accent-cyan);
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 4rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    .section-line {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      margin: 0.8rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: calc(var(--nav-height) + 40px);
+      padding-bottom: 60px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .hero-tag .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(0, 212, 255, 0);
+      }
+    }
+
+    .hero-name {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 0.9s ease 0.1s both;
+    }
+
+    .hero-name .first {
+      color: var(--text-primary);
+    }
+
+    .hero-name .last {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      margin-bottom: 1.6rem;
+      animation: fadeInUp 0.9s ease 0.2s both;
+    }
+
+    .hero-title .typed-text {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .hero-intro {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.9s ease 0.3s both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s ease 0.4s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #050a12;
+      box-shadow: 0 0 24px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent-cyan);
+      border: 1.5px solid var(--accent-cyan);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 212, 255, 0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+    }
+
+    /* Hero scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeIn 1.5s ease 1s both;
+    }
+
+    .scroll-indicator .mouse {
+      width: 24px;
+      height: 38px;
+      border: 2px solid var(--text-secondary);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-indicator .mouse::after {
+      content: '';
+      width: 4px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 2px;
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollDown 1.5s infinite;
+    }
+
+    @keyframes scrollDown {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 12px);
+      }
+    }
+
+    /* Floating tech badges in hero */
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 2rem;
+      animation: fadeInUp 0.9s ease 0.5s both;
+    }
+
+    .badge {
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+    }
+
+    .badge:hover {
+      background: rgba(0, 212, 255, 0.14);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    /* ============================================================
+       ABOUT SECTION
+    ============================================================ */
+    #about {
+      background: rgba(11, 21, 38, 0.5);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-frame {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 20px;
+      background: var(--bg-card2);
+      border: 2px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ============================================================
+       CHANGE: Replace 'images/profile.jpg' with your photo path
+    ============================================================ */
+    .about-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.05);
+      filter: grayscale(20%);
+      border-radius: 18px;
+    }
+
+    .about-img-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    /* Placeholder if no image */
+    .about-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .about-img-placeholder i {
+      font-size: 5rem;
+      color: var(--accent-cyan);
+      opacity: 0.4;
+    }
+
+    .about-img-frame::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      z-index: -1;
+    }
+
+    .corner-badge {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 12px;
+      padding: 14px 18px;
+      text-align: center;
+      font-family: 'Orbitron', monospace;
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .corner-badge .num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .corner-badge .lbl {
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+
+    .about-text p strong {
+      color: var(--accent-cyan);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .stat-box:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .stat-box .n {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+    }
+
+    .stat-box .l {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       SKILLS SECTION
+    ============================================================ */
+    #skills {
+      background: var(--bg-dark);
+    }
+
+    .skills-categories {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .skills-cat-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skills-cat-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ============================================================
+       CHANGE: Add or remove skill cards inside the HTML skills section
+    ============================================================ */
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+      cursor: default;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.06), rgba(168, 85, 247, 0.06));
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 12px 30px rgba(0, 212, 255, 0.14);
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-card i {
+      font-size: 2rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .skill-card .name {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    /* Icon colors per skill */
+    .ic-c {
+      color: #a8b9cc;
+    }
+
+    .ic-cpp {
+      color: #00599c;
+    }
+
+    .ic-py {
+      color: #3776ab;
+    }
+
+    .ic-ros {
+      color: #22b0d8;
+    }
+
+    .ic-esp {
+      color: #e7172d;
+    }
+
+    .ic-rtos {
+      color: #f59e0b;
+    }
+
+    .ic-cv {
+      color: #5c9bd4;
+    }
+
+    .ic-ctrl {
+      color: #a855f7;
+    }
+
+    .ic-proto {
+      color: #00d4ff;
+    }
+
+    .ic-hw {
+      color: #10b981;
+    }
+
+    .ic-iot {
+      color: #f97316;
+    }
+
+    .ic-ai {
+      color: #ec4899;
+    }
+
+    .ic-git {
+      color: #f1502f;
+    }
+
+    .ic-linux {
+      color: #fcd34d;
+    }
+
+    /* ============================================================
+       PROJECTS SECTION
+    ============================================================ */
+    #projects {
+      background: rgba(11, 21, 38, 0.5);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       CHANGE: Each project card data is in the HTML below.
+               Update title, description, tech, githubLink,
+               imageSrc, and videoSrc for each project.
+    ============================================================ */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1);
+    }
+
+    .project-media {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--bg-card2);
+      overflow: hidden;
+    }
+
+    .project-media img,
+    .project-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-media img {
+      transform: scale(1.05);
+    }
+
+    .project-media .media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(5, 10, 18, 0.9));
+    }
+
+    .media-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--accent-cyan);
+      opacity: 0.25;
+    }
+
+    /* Video toggle button */
+    .video-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 212, 255, 0.15);
+      border: 1px solid rgba(0, 212, 255, 0.4);
+      border-radius: 8px;
+      color: var(--accent-cyan);
+      padding: 5px 10px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s;
+    }
+
+    .video-toggle:hover {
+      background: rgba(0, 212, 255, 0.3);
+    }
+
+    .project-info {
+      padding: 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-info h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .project-info p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-tag {
+      background: rgba(0, 212, 255, 0.07);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.3px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .btn-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-sm-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #050a12;
+    }
+
+    .btn-sm-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+    }
+
+    .btn-sm-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-sm-ghost:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .project-category {
+      max-width: 1200px;
+      margin: 80px auto 0;
+    }
+
+    .category-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-title span {
+      color: var(--accent-cyan);
+    }
+
+    .project-category .section-line {
+      margin: 0 0 35px 0;
+    }
+
+    /* ============================================================
+       CERTIFICATES SECTION
+    ============================================================ */
+    #certificates {
+      background: var(--bg-dark);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       CHANGE: Add/remove certificate cards in the HTML below
+    ============================================================ */
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.35s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.1);
+    }
+
+    .cert-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .cert-card:nth-child(odd) .cert-icon {
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--accent-cyan);
+    }
+
+    .cert-card:nth-child(even) .cert-icon {
+      background: rgba(168, 85, 247, 0.1);
+      color: var(--accent-purple);
+    }
+
+    .cert-info h4 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.82rem;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+
+    .cert-info p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .cert-info .cert-date {
+      color: var(--accent-cyan);
+      font-size: 0.72rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact {
+      background: rgba(11, 21, 38, 0.5);
+    }
+
+    .contact-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-cyan);
+    }
+
+    .contact-info p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 0.93rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    /* ============================================================
+       CHANGE: Update contact/social links here
+    ============================================================ */
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      transition: all 0.3s;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .contact-link:hover {
+      color: var(--accent-cyan);
+      background: rgba(0, 212, 255, 0.06);
+      border-color: var(--border);
+    }
+
+    .contact-link i {
+      font-size: 1.1rem;
+      width: 24px;
+      color: var(--accent-cyan);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      resize: vertical;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(5, 10, 18, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 8%;
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      font-family: 'Orbitron', monospace;
+      color: var(--accent-cyan);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px var(--accent-cyan);
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    footer .footer-links a {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    footer p {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    footer p span {
+      color: var(--accent-cyan);
+    }
+
+    /* ============================================================
+       KEYFRAMES
+    ============================================================ */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ============================================================
+       IMAGE GALLERY BUTTON (on project cards)
+    ============================================================ */
+    .gallery-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(168, 85, 247, 0.18);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      border-radius: 8px;
+      color: #c084fc;
+      padding: 5px 10px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s;
+      z-index: 3;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+    }
+
+    .gallery-toggle:hover {
+      background: rgba(168, 85, 247, 0.35);
+    }
+
+    /* ============================================================
+       LIGHTBOX OVERLAY (image gallery)
+    ============================================================ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    .lb-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+      z-index: 2;
+    }
+
+    .lb-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .lb-counter {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+    }
+
+    .lb-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .lb-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .lb-img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lb-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    #lb-img.fading {
+      opacity: 0;
+    }
+
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      color: var(--accent-cyan);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 5;
+    }
+
+    .lb-arrow:hover {
+      background: rgba(0, 212, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lb-prev {
+      left: -70px;
+    }
+
+    .lb-next {
+      right: -70px;
+    }
+
+    .lb-dots {
+      position: absolute;
+      bottom: -40px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .lb-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .lb-dot.active {
+      background: var(--accent-cyan);
+      transform: scale(1.3);
+    }
+
+    .lb-thumbnails {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 24px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      overflow-x: auto;
+    }
+
+    .lb-thumb {
+      width: 60px;
+      height: 42px;
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.55;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .lb-thumb.active {
+      border-color: var(--accent-cyan);
+      opacity: 1;
+    }
+
+    .lb-thumb:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .lb-prev {
+        left: 4px;
+      }
+
+      .lb-next {
+        right: 4px;
+      }
+
+      .lb-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ============================================================
+       CERTIFICATE MODAL
+    ============================================================ */
+    .cert-card {
+      cursor: pointer;
+    }
+
+    .cert-card .cert-view-hint {
+      font-size: 0.7rem;
+      color: var(--accent-purple);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.8;
+    }
+
+    #certModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeIn 0.25s ease;
+      padding: 20px;
+    }
+
+    #certModal.open {
+      display: flex;
+    }
+
+    .cert-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .cert-modal-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: var(--accent-cyan);
+    }
+
+    .cert-modal-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .cert-modal-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    #certModalImg {
+      max-width: min(860px, 92vw);
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(168, 85, 247, 0.3);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .cert-modal-placeholder {
+      width: min(860px, 92vw);
+      height: 400px;
+      background: var(--bg-card2);
+      border: 2px dashed rgba(168, 85, 247, 0.4);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .cert-modal-placeholder i {
+      font-size: 4rem;
+      color: rgba(168, 85, 247, 0.4);
+    }
+
+    .cert-modal-placeholder p {
+      font-size: 0.85rem;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-img-wrap {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      section {
+        padding: 80px 5% 60px;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: rgba(5, 10, 18, 0.97);
+        padding: 2rem;
+        gap: 1.6rem;
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom cursor (hidden on touch) -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Animated background -->
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="navbar">
+    <!-- CHANGE: Update the logo text -->
+    <span class="nav-logo">NE.M</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       CHANGE: Update name, title, and intro text
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-tag"><span class="dot"></span>Available for Projects &amp; Opportunities</div>
+      <h1 class="hero-name">
+        <span class="first">Nour Eldin<br /></span>
+        <span class="last">Mahmoud</span>
+      </h1>
+      <p class="hero-title">
+        <span class="typed-text" id="typedText"></span>
+      </p>
+      <!-- CHANGE: Update your intro description -->
+      <p class="hero-intro">
+        Mechatronics Engineering student passionate about bridging the gap between hardware and software.
+        I build intelligent embedded systems, autonomous robots, and IoT solutions — turning ideas into
+        real-world machines that sense, think, and act.
+      </p>
+      <div class="hero-cta">
+        <!-- CHANGE: Update resume link -->
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-microchip"></i> View Projects</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">Mechatronics</span>
+        <span class="badge">Robotics</span>
+        <span class="badge">Embedded Systems</span>
+        <span class="badge">RTOS</span>
+        <span class="badge">Computer vision</span>
+        <span class="badge">Data Science</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">Deep Learning</span>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT SECTION
+  ============================================================ -->
+  <section id="about">
+    <h2 class="section-title reveal">About <span>Me</span></h2>
+    <div class="section-line reveal"></div>
+    <p class="section-sub reveal">Who I am &amp; what drives me</p>
+
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-img-frame">
+          <!-- CHANGE: Replace with your photo: <img src="images/profile.jpg" alt="Nour Eldin Mahmoud" /> -->
+          <img src="images/me/me.jpg" alt="Nour Eldin Mahmoud" />
+        </div>
+        <div class="corner-badge">
+          <div class="num">4+</div>
+          <div class="lbl">Years Learning</div>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <!-- CHANGE: Update your about text -->
+        <p>
+          I'm <strong>Nour Eldin Ashraf</strong>, a Mechatronics Engineering student passionate about building intelligent systems that combine <strong>Artificial Intelligence, Computer Vision, Embedded Systems, and Robotics</strong>. I enjoy solving real-world engineering problems by developing software that bridges the gap between hardware and intelligent decision-making.
+        </p>
+
+        <p>
+          My experience spans <strong>Machine Learning, Deep Learning, Data Analysis, Computer Vision, and Embedded Systems</strong>, where I've built end-to-end projects ranging from predictive models and real-time object detection to autonomous lane detection, video anomaly detection, and robotic vision applications. I work with technologies including <strong>Python, YOLOv11, OpenCV, TensorFlow, Scikit-learn, STM32, Raspberry Pi, and ROS</strong>.
+        </p>
+        <p>
+          I believe great engineering is about creating solutions that are not only accurate, but also efficient, scalable, and ready for real-world deployment. I'm always eager to learn new technologies, tackle challenging problems, and contribute to projects that push the boundaries of AI, robotics, and intelligent automation.
+        </p>
+        <p>
+          Whether it's developing AI-powered applications, integrating computer vision into robotic systems, or transforming raw data into meaningful insights, my goal is to deliver solutions that create real value for clients, users, and engineering teams.
+        </p>
+
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="n">15+</div>
+            <div class="l">Projects</div>
+          </div>
+          <div class="stat-box">
+            <div class="n">10+</div>
+            <div class="l">Technologies</div>
+          </div>
+          <div class="stat-box">
+            <div class="n">5+</div>
+            <div class="l">Certificates</div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <!-- CHANGE: Update social links -->
+          <a href="https://github.com/Notsuperman7" target="_blank" class="btn btn-outline"
+            style="padding:10px 20px;font-size:0.85rem;">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/nour-eldin-mechatronics" target="_blank" class="btn btn-outline"
+            style="padding:10px 20px;font-size:0.85rem;">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS SECTION
+       CHANGE: Add/remove skill cards or update icon classes
+  ============================================================ -->
+  <section id="skills">
+    <h2 class="section-title reveal">Technical <span>Skills</span></h2>
+    <div class="section-line reveal"></div>
+    <p class="section-sub reveal">Technologies &amp; tools I work with</p>
+
+    <div class="skills-categories">
+
+      <!-- Category: Programming Languages -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-code"></i> Programming Languages</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <img src="images/icon/prog_lang/C.jpg" alt="C"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">C</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/prog_lang/C++.jpg" alt="C++"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">C++</span>
+          </div>
+          <div class="skill-card"><i class="fab fa-python ic-py"></i><span class="name">Python</span></div>
+          <div class="skill-card">
+            <img src="images/icon/prog_lang/HTML5_logo.jpg" alt="HTML"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">HTML</span>
+          </div>
+
+          <div class="skill-card">
+            <img src="images/icon/prog_lang/CSS_Logo.jpg" alt="CSS"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">CSS</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/prog_lang/jave.jpg" alt="JavaScript"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category: Embedded & Microcontrollers -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-microchip"></i> Embedded & Microcontrollers</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <img src="images/icon/microcontroller/Esp.jpg" alt="ESP32"
+              style="width:70px;height:70px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">ESP32</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/microcontroller/TivaC.png" alt="TM4C / Tiva C"
+              style="width:80px;height:80px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">TM4C /Tiva C</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/microcontroller/raspberrypi.png" alt="Raspberry Pi"
+              style="width:80px;height:80px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">Raspberry Pi</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/microcontroller/arduino.png" alt="Arduino"
+              style="width:80px;height:80px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">Arduino</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/microcontroller/STM32.png" alt="STM32"
+              style="width:80px;height:80px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">STM32</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category: Communication Protocols -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-network-wired"></i> Communication Protocols</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <img src="images/icon/Communication/Uart.png" alt="UART"
+              style="width:50px;height:50px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">UART</span>
+          </div>
+          <div class="skill-card"><i class="fas fa-project-diagram ic-proto"></i><span class="name">I2C</span></div>
+          <div class="skill-card"><i class="fas fa-exchange-alt ic-proto"></i><span class="name">ESP-NOW</span></div>
+          <div class="skill-card">
+            <img src="images/icon/Communication/bluetooth.png" alt="Bluetooth"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">Bluetooth</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/Communication/WIFI.png" alt="Wi-Fi / IoT"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">Wi-Fi / IoT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category: Robotics & AI -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-robot"></i> Robotics, AI & Vision</p>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fas fa-robot ic-ros"></i><span class="name">ROS2</span></div>
+          <div class="skill-card"><i class="fas fa-brain ic-ai"></i><span class="name">Computer Vision</span></div>
+          <div class="skill-card">
+            <img src="images/icon/tools/PID.png" alt="PID Control"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i>
+            <span class="name">PID Control</span>
+          </div>
+          <div class="skill-card"><i class="fas fa-route ic-ros"></i><span class="name">Path Planning</span></div>
+          <div class="skill-card"><i class="fas fa-camera ic-cv"></i><span class="name">Sensor Fusion</span></div>
+        </div>
+      </div>
+
+
+      <!-- Category: Tools -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-tools"></i> Tools</p>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fas fa-eye ic-c"></i><span class="name">OpenCV</span></div>
+          <div class="skill-card">
+            <img src="images/icon/tools/Numpy.png" alt="NumPY"
+              style="width:40px;height:40px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">NumPY</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/tools/tens.png" alt="TensorFlow"
+              style="width:55x;height:55px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">TensorFlow</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/tools/pandas.png" alt="Pandas"
+              style="width:55px;height:55px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">Pandas</span>
+          </div>
+          <div class="skill-card">
+            <img src="images/icon/tools/scikit.png" alt="sckit-learn"
+              style="width:55px;height:55px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">scikit-learn</span>
+          </div>
+
+          <div class="skill-card">
+            <img src="images/icon/tools/RTOS.png" alt="FreeRtos"
+              style="width:55px;height:55px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">FreeRtos</span>
+          </div>
+
+          <div class="skill-card">
+            <img src="images/icon/matlab/Matlab_Logo.jpg" alt="matlab"
+              style="width:55px;height:55px;object-fit:contain; position:relative; left:50%;transform:translateX(-50%);">
+            </i><span class="name">MATLAB</span>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <!-- Category: platforms -->
+      <div class="reveal">
+        <p class="skills-cat-title"><i class="fas fa-tools"></i> Platforms</p>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fab fa-git-alt ic-git"></i><span class="name">Git / GitHub</span></div>
+          <div class="skill-card"><i class="fab fa-linux ic-linux"></i><span class="name">Linux</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS SECTION
+       CHANGE: Update project details, images, videos, and links
+               Image paths: images/project-name.jpg
+               Video paths: videos/project-name.mp4
+               GitHub:      https://github.com/YOUR_USERNAME/REPO
+  ============================================================ -->
+  <section id="projects">
+    <h2 class="section-title reveal">Featured <span>Projects</span></h2>
+    <div class="section-line reveal"></div>
+    <p class="section-sub reveal">Engineering solutions I've built from concept to hardware</p>
+
+    <!-- ROBOTS CATEGORY -->
+
+    <div class="project-category">
+      <h3 class="category-title"><i class="fas fa-robot"></i>Robots <span>Projects</span></h3>
+      <div class="section-line"></div>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- ROBOT 1:  Retribot -->
+        <div class="project-card reveal" data-index="0">
+          <div class="project-media"
+            data-images="images/Robots_projects/Retribot/1.png,images/Robots_projects/Retribot/2.png,images/Robots_projects/Retribot/3.png,images/Robots_projects/Retribot/4.png,images/Robots_projects/Retribot/5.png"
+            data-title="Retribot">
+            <img src="images/Robots_projects/Retribot/0.png" alt="ROS2 Autonomous Robot"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-robot"></i></div>
+            <div class="media-overlay"></div>
+            <button class="gallery-toggle" onclick="openGallery(this.closest('.project-media'))">
+              <i class="fas fa-images"></i> Photos
+            </button>
+            <a href="https://drive.google.com/file/d/1ptpHWVeVG2bCK5eR50e-Zbih1lev6HO-/view?usp=sharing"
+              target="_blank"
+              class="video-toggle">
+              <i class="fas fa-play"></i> Demo
+            </a>
+          </div>
+          <div class="project-info">
+            <h3> Retribot</h3>
+            <p>A Lost items semiautonomous mobile robot with real-time object detection and obstacle avoidance. Using a
+              pretrained model (YOLOV11n) to identify and detect lost items, while sensor fusion (IR + TOF) enables safe
+              autonomous navigation.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">ROS2</span>
+              <span class="tech-tag">Raspberry Pi</span>
+              <span class="tech-tag">Esp32-S3</span>
+              <span class="tech-tag">Object detection(LOST ITEMS)</span>
+              <span class="tech-tag">AUTO/MANUAL MODE</span>
+              <span class="tech-tag">YOLOV11n</span>
+              <span class="tech-tag">GUI</span>
+              <span class="tech-tag">Obstacle Avoidance static/dynamic</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/OmarAliM5/Retribot" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <a href="https://drive.google.com/file/d/1ptpHWVeVG2bCK5eR50e-Zbih1lev6HO-/view?usp=sharing"
+                target="_blank" class="btn-sm btn-sm-ghost">
+                <i class="fas fa-play"></i> Demo
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROBOT 2: Autonomous Robot -->
+
+        <div class="project-card reveal" data-index="1">
+          <div class="project-media"
+            data-images="images/autonomous/autonomous_Robot.jpg,images/autonomous/autonomous2.jpg,images/autonomous/autonomous3.jpg"
+            data-title="Autonomous Robot">
+            <img src="images/Robots_projects/autonomous_Robot.jpg" alt="ROS2 Autonomous Robot"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-robot"></i></div>
+            <div class="media-overlay"></div>
+            <a href="https://drive.google.com/file/d/12kDbUylWQSZDzQEkKV2H9_20d9TtiQbr/view?usp=sharing"
+              target="_blank"
+              class="video-toggle">
+              <i class="fas fa-play"></i> Demo
+            </a>
+          </div>
+          <div class="project-info">
+            <h3>Autonomous Robot</h3>
+            <p>A Raspberry Pi-powered ROS2 autonomous mobile robot with real-time lane detection and obstacle avoidance.
+              Computer vision pipelines using OpenCV identify lane boundaries, while sensor fusion (camera + IR + TOF)
+              enables safe autonomous navigation.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">ROS2</span>
+              <span class="tech-tag">Raspberry Pi</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">Lane Detection</span>
+              <span class="tech-tag">Obstacle Avoid.</span>
+              <span class="tech-tag">Sensor Fusion</span>
+              <span class="tech-tag">GUI</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Autonomous_Robot" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <a href="https://drive.google.com/file/d/12kDbUylWQSZDzQEkKV2H9_20d9TtiQbr/view?usp=sharing"
+                target="_blank" class="btn-sm btn-sm-ghost">
+                <i class="fas fa-play"></i> Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROBOT 3: 5 DOF Robotic Arm -->
+
+        <div class="project-card reveal" data-index="2">
+          <div class="project-media"
+            data-images="images/Robots_projects/Robotic_arm/1.jpeg,images/Robots_projects/Robotic_arm/2.jpeg,images/Robots_projects/Robotic_arm/3.jpeg,images/Robots_projects/Robotic_arm/4.jpeg,images/Robots_projects/Robotic_arm/5.jpeg"
+            data-title="5 DOF Robotic Arm">
+            <img src="images/Robots_projects/Robotic_arm/robotic_arm.png" alt="ROS2 5 DOF Robotic Arm"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-robot"></i></div>
+            <div class="media-overlay"></div>
+            <button class="gallery-toggle" onclick="openGallery(this.closest('.project-media'))">
+              <i class="fas fa-images"></i> Photos
+            </button>
+            <button class="video-toggle" onclick="toggleVideo(this, 'videos/Robots_projects/robotic_arm.mp4')">
+              <i class="fas fa-play"></i> Demo
+            </button>
+          </div>
+          <div class="project-info">
+            <h3>5 DOF Robotic Arm</h3>
+            <p>A ROS2-powered 5-DOF robotic arm featuring motion planning, robot modeling, and manipulation using
+              MoveIt. URDF and RViz enable accurate visualization and joint trajectory execution, while Python-based
+              control nodes provide precise and modular robotic arm control.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">ROS2</span>
+              <span class="tech-tag">ESP32</span>
+              <span class="tech-tag">MoveIt</span>
+              <span class="tech-tag">Gazebo</span>
+              <span class="tech-tag">RViz</span>
+              <span class="tech-tag">Python</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Robotics_project" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-ghost"
+                onclick="toggleVideo(this.closest('.project-card').querySelector('.video-toggle'), 'videos/Robots_projects/robotic_arm.mp4')">
+                <i class="fas fa-play"></i> Demo
+              </button>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROBOT 4: 3 DOF Cartesian Robot -->
+
+        <div class="project-card reveal" data-index="3">
+          <div class="project-media"
+            data-images="images/Robots_projects/cartesian/1.jpeg,images/Robots_projects/cartesian/2.jpeg,images/Robots_projects/cartesian/3.jpeg,images/Robots_projects/cartesian/4.jpeg"
+            data-title="3-DOF Cartesian Robot">
+            <img src="images/Robots_projects/cartesian/cartesian.jpg" alt="3-DOF Cartesian Robot"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-robot"></i></div>
+            <div class="media-overlay"></div>
+            <button class="gallery-toggle" onclick="openGallery(this.closest('.project-media'))">
+              <i class="fas fa-images"></i> Photos
+            </button>
+            <button class="video-toggle" onclick="toggleVideo(this, 'videos/Robots_projects/cartesian.mp4')">
+              <i class="fas fa-play"></i> Demo
+            </button>
+          </div>
+          <div class="project-info">
+            <h3>3-DOF Cartesian Robot</h3>
+            <p>A fully autonomous 3-axis Cartesian robot controlled via ESP32 with real-time task scheduling using
+              FreeRTOS. Features wireless multi-device coordination via ESP-NOW, precise stepper motor control with PID,
+              and an OLED status display.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">ESP32</span>
+              <span class="tech-tag">FreeRTOS</span>
+              <span class="tech-tag">ESP-NOW</span>
+              <span class="tech-tag">PID Control</span>
+              <span class="tech-tag">OLED</span>
+              <span class="tech-tag">Motor Control</span>
+            </div>
+            <div class="project-actions">
+              <!-- CHANGE: Update GitHub link -->
+              <a href="https://github.com/Notsuperman7/Cartesian/tree/main/src" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-ghost"
+                onclick="toggleVideo(this.closest('.project-card').querySelector('.video-toggle'), 'videos/Robots_projects/cartesian.mp4')">
+                <i class="fas fa-play"></i> Demo
+              </button>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ROBOT General_projects -->
+
+    <div class="project-category">
+      <h3 class="category-title"><i class="fas fa-cogs"></i>General <span>Projects</span></h3>
+      <div class="section-line"></div>
+
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- ====== PROJECT 1: Door Locker Security System ====== -->
+        <!-- CHANGE: Add more image paths to data-images (comma-separated) -->
+        <div class="project-card reveal" data-index="0">
+          <div class="project-media"
+            data-images="images/smart_Door/smart_door.jpg,images/smart_Door/smart_door2.jpg,images/smart_Door/smart_door3.jpg"
+            data-title="Smart Door Security System">
+            <img src="images/General_projects/smart_door.jpg" alt="Door Locker Security System"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-lock"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>Smart Door Security System</h3>
+            <p>A robust dual-microcontroller door security system built on TM4C/Tiva C using layered embedded software
+              architecture. Features UART communication between master/slave MCUs, EEPROM password storage, DC motor
+              actuation, and an alarm system.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">TM4C/Tiva C</span>
+              <span class="tech-tag">UART</span>
+              <span class="tech-tag">EEPROM</span>
+              <span class="tech-tag">Motor Control</span>
+              <span class="tech-tag">Alarm</span>
+              <span class="tech-tag">Layered SW</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Smart_Door_system" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== PROJECT 2: Automated Production Line ====== -->
+        <!-- CHANGE: Add more image paths to data-images (comma-separated) -->
+        <div class="project-card reveal" data-index="1">
+          <div class="project-media"
+            data-images="images/General_projects/sorting/0.png,images/General_projects/sorting/1.png,images/General_projects/sorting/2.png"
+            data-title="Feeder & Sorting System">
+            <img src="images/General_projects/sorting/0.png" alt="Automated Production Line"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+            <button class="gallery-toggle" onclick="openGallery(this.closest('.project-media'))">
+              <i class="fas fa-images"></i> Photos
+            </button>
+            <button class="video-toggle" onclick="toggleVideo(this, 'videos/General_projects/feed_and_sorting.mp4')">
+              <i class="fas fa-play"></i> Demo
+            </button>
+          </div>
+          <div class="project-info">
+            <h3>Feeder& Sorting System</h3>
+            <p>An ESP32-based automated production and sorting system using multi-node ESP-NOW wireless communication
+              and FreeRTOS for concurrent task management. PID control ensures precise actuator positioning for
+              intelligent sorting of objects by category.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">ESP32</span>
+              <span class="tech-tag">ESP-NOW</span>
+              <span class="tech-tag">FreeRTOS</span>
+              <span class="tech-tag">PID Control</span>
+              <span class="tech-tag">Automation</span>
+              <span class="tech-tag">Sorting</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Feeder-and-sorting/tree/main/src" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-ghost"
+                onclick="toggleVideo(this.closest('.project-card').querySelector('.video-toggle'), 'videos/General_projects/feed_and_sorting.mp4')">
+                <i class="fas fa-play"></i> Demo
+              </button>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== PROJECT 3: Smart Flow Meter ====== -->
+        <!-- CHANGE: Add more image paths to data-images (comma-separated) -->
+        <div class="project-card reveal" data-index="2">
+          <div class="project-media"
+            data-images="images/General_projects/flowmeter/0.png,images/General_projects/flowmeter/1.png,images/General_projects/flowmeter/2.png,images/General_projects/flowmeter/3.png,images/General_projects/flowmeter/4.png,images/General_projects/flowmeter/5.png,images/General_projects/flowmeter/6.png,images/General_projects/flowmeter/7.png,images/General_projects/flowmeter/8.png,images/General_projects/flowmeter/9.png,images/General_projects/flowmeter/10.png,images/General_projects/flowmeter/11.png,images/General_projects/flowmeter/12.png,images/General_projects/flowmeter/13.png"
+            data-title="Smart Flow Meter">
+            <img src="images/General_projects/flowmeter/0.png" alt="Smart Flow Meter"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-tint"></i></div>
+            <div class="media-overlay"></div>
+            <button class="gallery-toggle" onclick="openGallery(this.closest('.project-media'))">
+              <i class="fas fa-images"></i> Photos
+            </button>
+          </div>
+          <div class="project-info">
+            <h3>Smart Flow Meter</h3>
+            <p>An IoT-connected smart flow meter with embedded firmware for accurate real-time flow rate calculation.
+              Transmits live measurements wirelessly via Bluetooth and Wi-Fi, enabling remote monitoring and data
+              logging from any device on the network.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Sensors</span>
+              <span class="tech-tag">Embedded FW</span>
+              <span class="tech-tag">Bluetooth</span>
+              <span class="tech-tag">Wi-Fi</span>
+              <span class="tech-tag">IoT</span>
+              <span class="tech-tag">Flow Calc</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Flow_meter" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+              <!-- No demo video for this project -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- computer_Vision_projects -->
+
+
+    <div class="project-category">
+      <h3 class="category-title"><i class="fas fa-eye ic-cv"></i>Computer Vision<span>Projects</span></h3>
+      <div class="section-line"></div>
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- 1 projects -->
+        <div class="project-card reveal" data-index="0">
+          <div class="project-media"
+            data-images="images/CV_projects/lane_detection/0.png,images/CV_projects/lane_detection/1.png,images/CV_projects/lane_detection/2.png,images/CV_projects/lane_detection/3.png,images/CV_projects/lane_detection/4.png,images/CV_projects/lane_detection/5.png,"
+            data-title="Smart Door Security System">
+            <img src="images/CV_projects/lane_detection/0.png" alt="Lane Detection"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-lock"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>Lane Detection</h3>
+            <p>The lane_detection_node subscribes to the robot camera topic, processes the image using OpenCV, detects
+              the lane, and calculates the robot’s error from the lane center.It is designed to help an autonomous
+              mobile robot follow a lane using visual feedback.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">OpenCv</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">ROS2 jazzy</span>
+              <span class="tech-tag">Pi5</span>
+              <span class="tech-tag">Camera</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/lane_detection" target="_blank" class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 projects -->
+
+        <div class="project-card reveal" data-index="1">
+          <div class="project-media"
+            data-images="images/CV_projects/anomaly_detection/0.png,images/CV_projects/anomaly_detection/1.png,images/CV_projects/anomaly_detection/2.png,images/CV_projects/anomaly_detection/3.png,images/CV_projects/anomaly_detection/4.png,images/CV_projects/anomaly_detection/5.png,images/CV_projects/anomaly_detection/6.png,images/CV_projects/anomaly_detection/7.png,images/CV_projects/anomaly_detection/8.png,images/CV_projects/anomaly_detection/9.png"
+            data-title="Real-Time Video Anomaly Detection & Classification">
+            <img src="images/CV_projects/anomaly_detection/0.png" alt="anomaly_detection"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>Real-Time Video Anomaly Detection & Classification</h3>
+            <p>Developed a hybrid deep learning surveillance system for real-time video anomaly detection and
+              classification. A ConvLSTM model learns normal motion patterns and detects anomalies using motion
+              prediction errors (MSE + SSIM), while YOLO classifies abnormal objects and displays real-time bounding
+              boxes and labels on the video stream.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">TensorFLow</span>
+              <span class="tech-tag">NumPY</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">ConvLSTM</span>
+              <span class="tech-tag">YOLO</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Video-Anomaly-Detection" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-ghost"
+                onclick="toggleVideo(this.closest('.project-card').querySelector('.video-toggle'), 'videos/CV_projects/anomaly_detection.mp4')">
+                <i class="fas fa-play"></i> Demo
+              </button>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="project-card reveal" data-index="2">
+          <div class="project-media"
+            data-images="images/CV_projects/item_detection/0.png,images/CV_projects/item_detection/1.png,images/CV_projects/item_detection/2.png,images/CV_projects/item_detection/3.png,images/CV_projects/item_detection/4.png,images/CV_projects/item_detection/5.png,images/CV_projects/item_detection/6.png,images/CV_projects/item_detection/7.png,images/CV_projects/item_detection/8.png,images/CV_projects/item_detection/9.png,images/CV_projects/item_detection/10.png,images/CV_projects/item_detection/11.png,images/CV_projects/item_detection/12.png,images/CV_projects/item_detection/13.png"
+            data-title="Items Detection">
+            <img src="images/CV_projects/item_detection/0.png" alt="item_detection"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>Items Detection</h3>
+            <p>Built a ROS 2 vision node using YOLO and OpenCV for real-time object detection and tracking. The system
+              detects and classifies objects, computes their horizontal offset relative to the camera center, and
+              publishes a signed error value (− for left, + for right) to enable autonomous robot steering and
+              object-centered navigation.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">ROS2 jazzy</span>
+              <span class="tech-tag">Pi5</span>
+              <span class="tech-tag">Camera</span>
+              <span class="tech-tag">YOLOv11n</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/OmarAliM5/Retribot/tree/main/camera_pkg" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-ghost"
+                onclick="toggleVideo(this.closest('.project-card').querySelector('.video-toggle'), 'videos/CV_projects/iteam_detection.mp4')">
+                <i class="fas fa-play"></i> Demo
+              </button>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ML Projects -->
+
+    <div class="project-category">
+      <h3 class="category-title"><i class="fas fa-brain ic-ai"></i>ML & Data Anaylsis<span>Projects</span></h3>
+      <div class="section-line"></div>
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- 1 projects -->
+
+        <div class="project-card reveal" data-index="0">
+          <div class="project-media"
+            data-images="images/ML_projects/Telco_Customer/0.png,images/ML_projects/Telco_Customer/1.png,images/ML_projects/Telco_Customer/2.png,images/ML_projects/Telco_Customer/3.png,images/ML_projects/Telco_Customer/4.png,images/ML_projects/Telco_Customer/5.png,images/ML_projects/Telco_Customer/6.png,images/ML_projects/Telco_Customer/7.png,images/ML_projects/Telco_Customer/8.png"
+            data-title="Telco customer predict Model">
+            <img src="images/ML_projects/Telco_Customer/0.png" alt="Telco customer predict Model"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+
+          <div class="project-info">
+            <h3>Telco customer predict Model </h3>
+            <p>Developed a machine learning model to predict customer churn for a telecommunications company. Utilized various algorithms including logistic regression, random forest, and gradient boosting to analyze customer behavior and demographic data.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPY</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">RandomForestClassifier</span>
+              <span class="tech-tag">matplot</span>
+              <span class="tech-tag">seaborn</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/Telco_customer_predict_project" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 projects -->
+
+        <div class="project-card reveal" data-index="1">
+          <div class="project-media"
+            data-images="images/ML_projects/Titanic/0.png,images/ML_projects/Titanic/1.png,images/ML_projects/Titanic/2.png,images/ML_projects/Titanic/3.png,images/ML_projects/Titanic/4.png,images/ML_projects/Titanic/5.png,images/ML_projects/Titanic/6.png,images/ML_projects/Titanic/7.png"
+            data-title="Titanic predict model">
+            <img src="images/ML_projects/Titanic/0.png" alt="Titanic predict model"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>Titanic predict model</h3>
+            <p>Developed a machine learning model to predict survival outcomes for passengers on the Titanic. Utilized various algorithms including logistic regression, random forest, and gradient boosting to analyze demographic and socioeconomic factors influencing survival rates.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPY</span>
+              <span class="tech-tag">pandas</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">LogisticRegression</span>
+              <span class="tech-tag">matplot</span>
+              <span class="tech-tag">seaborn</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/ML_Titnic_project" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- 3 projects -->
+
+        <div class="project-card reveal" data-index="1">
+          <div class="project-media"
+            data-images="images/ML_projects/California_housing/0.png,images/ML_projects/California_housing/1.png,images/ML_projects/California_housing/2.png,images/ML_projects/California_housing/3.png,images/ML_projects/California_housing/4.png,images/ML_projects/California_housing/5.png"
+            data-title="California Housing Data Analysis">
+            <img src="images/ML_projects/California_housing/0.png" alt="California Housing Data Analysis"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="media-placeholder" style="display:none;"><i class="fas fa-industry"></i></div>
+            <div class="media-overlay"></div>
+          </div>
+          <div class="project-info">
+            <h3>California Housing Data Analysis</h3>
+            <p>Conducted a comprehensive analysis of California housing data to identify trends and patterns in property values and demographics. Utilized statistical methods and machine learning techniques to build predictive models for housing price forecasting.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPY</span>
+              <span class="tech-tag">pandas</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">folium/HeatMap</span>
+              <span class="tech-tag">matplot</span>
+              <span class="tech-tag">seaborn</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Notsuperman7/California_housing_data_analysis" target="_blank"
+                class="btn-sm btn-sm-primary">
+                <i class="fab fa-github"></i> View Code
+              </a>
+              <button class="btn-sm btn-sm-secondary"
+                onclick="openGallery(this.closest('.project-card').querySelector('.project-media'))">
+                <i class="fas fa-images"></i> Photos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CERTIFICATES SECTION
+       CHANGE: Add/remove certificate cards with your real certs
+  ============================================================ -->
+  <section id="certificates">
+    <h2 class="section-title reveal">Certificates <span>&amp; Courses</span></h2>
+    <div class="section-line reveal"></div>
+    <p class="section-sub reveal">Learning milestones &amp; professional development</p>
+
+    <div class="certs-grid">
+
+      <!-- CHANGE: Set data-cert="certificates/your-cert-name.jpg" for each card -->
+      <div class="cert-card reveal" data-cert="images/certificates/robotic_cornor/Embedded_c++.jpg"
+        onclick="openCert(this)">
+        <div class="cert-icon"><i class="fas fa-microchip"></i></div>
+        <div class="cert-info">
+          <h4>Embedded C++ Diploma</h4>
+          <p> Embedded C++ Diploma covering modern C++ programming,SOLID principles and design patterns, DevOps
+            fundamentals, microcontroller interfacing, and real-time operating systems (RTOS) through hands on training
+            and projects &amp; layered architecture design</p>
+          <p class="cert-date">2025</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" data-cert="images/certificates/Garrio/AVR_embeddedC.jpg" onclick="openCert(this)">
+        <div class="cert-icon"><i class="fas fa-microchip"></i></div>
+        <div class="cert-info">
+          <h4>Embedded C Programming & AVR Systems</h4>
+          <p>Embedded C for AVR microcontrollers, focusing on understanding microcontroller architecture, reading
+            datasheets, and configuring peripherals at the register level, with practical applications on timers, UART,
+            and other core modules.</p>
+          <p class="cert-date">2025</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" data-cert="images/certificates/Codedex/python.jpg" onclick="openCert(this)">
+        <div class="cert-icon"><i class="fab fa-python"></i></div>
+        <div class="cert-info">
+          <h4>Python Fundamentals</h4>
+          <p>gain a knowledge of Python fundamentals of variables, control flow, loops, lists, functions, classes &
+            objects, modules, and certify their knowledge by completing two expert-reviewed projects, representing 50+
+            hours of hands-on coding experience.</p>
+          <p class="cert-date">2025</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" data-cert="images/certificates/soft_skills/presentation/Certificate.jpg"
+        onclick="openCert(this)">
+        <div class="cert-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="cert-info">
+          <h4>Presentation & Communication Compatition </h4>
+          <p>Awarded 2nd Place in the "Hands That Speaks" presentation competition
+            for delivering an impactful and engaging technical presentation,
+            demonstrating strong communication, public speaking, and presentation skills.</p>
+          <p class="cert-date">2025</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" data-cert="images/certificates/Matlab/MATLAB_certificate.jpg"
+        onclick="openCert(this)">
+        <div class="cert-icon">
+          <img src="images/icon/matlab/Matlab_Logo.jpg" alt="MATLAB" style="width:40px;height:40px;object-fit:contain;">
+        </div>
+        <div class="cert-info">
+          <h4>MATLAB Fundamentals</h4>
+          <p>Course covering MATLAB syntax, data analysis, plotting, and basic signal processing through hands on
+            exercises.</p>
+          <p class="cert-date">2024</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" data-cert="images/certificates/Matlab/Simulink_certificate.jpg"
+        onclick="openCert(this)">
+        <div class="cert-icon">
+          <img src="images/icon/matlab/simulink.jpg" alt="MATLAB" style="width:40px;height:40px;object-fit:contain;">
+        </div>
+        <div class="cert-info">
+          <h4>Simulink Fundamentals</h4>
+          <p>Hands on training in Simulink covering block diagrams, system modeling, simulation, and basic model-based
+            design concepts.</p>
+          <p class="cert-date">2024</p>
+          <p class="cert-view-hint"><i class="fas fa-expand-alt"></i> Click to view certificate</p>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT SECTION
+       CHANGE: Update email, phone, location, and all social links
+  ============================================================ -->
+  <section id="contact">
+    <h2 class="section-title reveal">Get In <span>Touch</span></h2>
+    <div class="section-line reveal"></div>
+    <p class="section-sub reveal">Let's build something incredible together</p>
+
+    <div class="contact-wrap">
+
+      <div class="contact-info reveal">
+        <h3>Let's Connect</h3>
+        <p>Whether it's a robotics project, embedded system, or just a chat about technology — I'm always open to new
+          collaborations and opportunities.</p>
+
+        <div class="contact-links">
+          <!-- CHANGE: Update email -->
+          <a href="mailto:nourashraf116@gmail.com" class="contact-link">
+            <i class="fas fa-envelope"></i> nourashraf116@gmail.com
+          </a>
+          <!-- CHANGE: Update GitHub -->
+          <a href="https://github.com/Notsuperman7" target="_blank" class="contact-link">
+            <i class="fab fa-github"></i> github.com/Notsuperman7
+          </a>
+          <!-- CHANGE: Update LinkedIn -->
+          <a href="https://www.linkedin.com/in/nour-eldin-mechatronics" target="_blank" class="contact-link">
+            <i class="fab fa-linkedin"></i> linkedin.com/in/nour-eldin-mechatronics
+          </a>
+          <!-- CHANGE: Update location -->
+          <a href="#" class="contact-link">
+            <i class="fas fa-map-marker-alt"></i> Egypt
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="contactName" placeholder="Ahmed Mohamed" />
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" id="contactEmail" placeholder="ahmed@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="contactMsg" placeholder="Tell me about your project or idea..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="sendMessage()" style="width:100%; justify-content:center;">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <p id="formMsg" style="color:var(--accent-cyan);font-size:0.85rem;margin-top:0.5rem;display:none;"></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       CHANGE: Update social icon links
+  ============================================================ -->
+  <footer>
+    <div class="footer-logo">NE.MAHMOUD</div>
+    <div class="footer-links">
+      <a href="https://github.com/Notsuperman7" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/nour-eldin-mechatronics" target="_blank" title="LinkedIn"><i
+          class="fab fa-linkedin"></i></a>
+      <a href="mailto:nourashraf116@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p>Designed &amp; Built by <span>Nour Eldin Mahmoud</span> &mdash; Mechatronics Engineer</p>
+    <p style="margin-top:0.4rem; font-size:0.7rem; opacity:0.5;">&copy; 2025 All rights reserved.</p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ── Custom Cursor ── */
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+    // Smooth ring follow
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Expand cursor on hoverable elements
+    document.querySelectorAll('a, button, .skill-card, .project-card, .cert-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.transform = 'translate(-50%, -50%) scale(1.6)';
+        ring.style.background = 'rgba(0,212,255,0.08)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.transform = 'translate(-50%, -50%) scale(1)';
+        ring.style.background = 'transparent';
+      });
+    });
+
+    // Hide cursor on mobile
+    if ('ontouchstart' in window) {
+      dot.style.display = ring.style.display = 'none';
+      document.body.style.cursor = 'default';
+    }
+
+    /* ── Navbar scroll effect ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ── Mobile hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    /* ── Typed text effect ── */
+    /* CHANGE: Update the titles array with your own roles */
+    const titles = [
+      'Mechatronics Engineer',
+      'Embedded Systems Developer',
+      'Robotics Enthusiast',
+      'IoT Builder',
+      'Computer Vision Developer'
+    ];
+    let ti = 0, ci = 0, deleting = false;
+    const typedEl = document.getElementById('typedText');
+
+    function typeLoop() {
+      const current = titles[ti];
+      if (!deleting) {
+        typedEl.textContent = current.slice(0, ++ci);
+        if (ci === current.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+      } else {
+        typedEl.textContent = current.slice(0, --ci);
+        if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; }
+      }
+      setTimeout(typeLoop, deleting ? 50 : 80);
+    }
+    typeLoop();
+
+    /* ── Scroll reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const idx = entry.target.dataset.index || 0;
+          entry.target.style.transitionDelay = (idx * 0.1) + 's';
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    /* ── Project video toggle ── */
+    /*
+      Clicking "Demo" on a project card will:
+      1. Replace the <img> with a <video> element
+      2. Play the video inline
+      3. Clicking again restores the image
+    */
+    function toggleVideo(btn, videoSrc) {
+      const media = btn.closest('.project-media') || btn.closest('.project-card').querySelector('.project-media');
+      const existing = media.querySelector('video');
+
+      if (existing) {
+        // Remove video, restore image
+        existing.remove();
+        const img = media.querySelector('img');
+        if (img) img.style.display = '';
+        btn.innerHTML = '<i class="fas fa-play"></i> Demo';
+        return;
+      }
+
+      // Create video
+      const video = document.createElement('video');
+      video.src = videoSrc;
+      video.onerror = () => {
+        console.log("FAILED:", videoSrc);
+        alert("Video failed to load: " + videoSrc);
+      };
+
+      video.onloadeddata = () => {
+        console.log("LOADED:", videoSrc);
+      };
+      video.controls = true;
+      video.autoplay = true;
+      video.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;background:#000;';
+
+      const img = media.querySelector('img');
+      if (img) img.style.display = 'none';
+      media.appendChild(video);
+      btn.innerHTML = '<i class="fas fa-times"></i> Close';
+
+
+      if (videoSrc.includes("drive.google.com")) {
+
+        const iframe = document.createElement("iframe");
+
+        iframe.src = videoSrc;
+        iframe.allow = "autoplay";
+        iframe.style.cssText =
+            "position:absolute;inset:0;width:100%;height:100%;border:none;z-index:2;background:#000;";
+
+        const img = media.querySelector("img");
+        if (img) img.style.display = "none";
+
+        media.appendChild(iframe);
+
+        btn.innerHTML = '<i class="fas fa-times"></i> Close';
+
+        return;
+      }
+    }
+
+    /* ── Contact form (client-side only) ── */
+    function sendMessage() {
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
+      const out = document.getElementById('formMsg');
+
+      if (!name || !email || !msg) {
+        out.style.color = '#f87171';
+        out.textContent = 'Please fill in all fields.';
+        out.style.display = 'block';
+        return;
+      }
+      // CHANGE: Connect this to a backend service (Formspree, EmailJS, etc.)
+      // Example with Formspree: https://formspree.io
+      out.style.color = 'var(--accent-cyan)';
+      out.textContent = '✓ Message noted! Connect a form service (Formspree / EmailJS) to enable sending.';
+      out.style.display = 'block';
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       IMAGE GALLERY LIGHTBOX
+       openGallery(mediaEl) — reads data-images (comma-sep paths)
+       and data-title from the .project-media element
+    ══════════════════════════════════════════════════════════ */
+    let lbImages = [];
+    let lbCurrent = 0;
+
+    function openGallery(mediaEl) {
+      const raw = mediaEl.dataset.images || '';
+      const title = mediaEl.dataset.title || 'Project Gallery';
+      // Filter to only non-empty paths
+      lbImages = raw.split(',').map(s => s.trim()).filter(Boolean);
+      lbCurrent = 0;
+
+      if (!lbImages.length) return;
+
+      document.getElementById('lbTitle').textContent = title;
+      buildLbThumbs();
+      buildLbDots();
+      lbShow(0);
+
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function lbShow(idx) {
+      lbCurrent = (idx + lbImages.length) % lbImages.length;
+      const img = document.getElementById('lb-img');
+
+      // Fade out → swap src → fade in
+      img.classList.add('fading');
+      setTimeout(() => {
+        img.src = lbImages[lbCurrent];
+        img.onerror = () => { img.src = ''; img.alt = 'Image not found'; };
+        img.classList.remove('fading');
+      }, 180);
+
+      // Counter
+      document.getElementById('lbCounter').textContent = `${lbCurrent + 1} / ${lbImages.length}`;
+
+      // Update dots
+      document.querySelectorAll('.lb-dot').forEach((d, i) => d.classList.toggle('active', i === lbCurrent));
+
+      // Update thumbs
+      document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === lbCurrent));
+    }
+
+    function lbMove(dir) { lbShow(lbCurrent + dir); }
+
+    function buildLbThumbs() {
+      const container = document.getElementById('lbThumbs');
+      container.innerHTML = '';
+      lbImages.forEach((src, i) => {
+        const t = document.createElement('img');
+        t.src = src;
+        t.className = 'lb-thumb' + (i === 0 ? ' active' : '');
+        t.onerror = () => t.style.display = 'none';
+        t.onclick = () => lbShow(i);
+        container.appendChild(t);
+      });
+    }
+
+    function buildLbDots() {
+      const container = document.getElementById('lbDots');
+      container.innerHTML = '';
+      if (lbImages.length <= 1) return;
+      lbImages.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'lb-dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => lbShow(i);
+        container.appendChild(d);
+      });
+    }
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (lb.classList.contains('open')) {
+        if (e.key === 'ArrowRight') lbMove(1);
+        if (e.key === 'ArrowLeft') lbMove(-1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+      const cm = document.getElementById('certModal');
+      if (cm.classList.contains('open') && e.key === 'Escape') closeCertModal();
+    });
+
+    // Touch / swipe support for lightbox
+    let lbTouchX = null;
+    document.getElementById('lightbox').addEventListener('touchstart', e => {
+      lbTouchX = e.touches[0].clientX;
+    });
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+      if (lbTouchX === null) return;
+      const dx = e.changedTouches[0].clientX - lbTouchX;
+      if (Math.abs(dx) > 40) lbMove(dx < 0 ? 1 : -1);
+      lbTouchX = null;
+    });
+
+    // Click backdrop to close lightbox
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+
+    /* ══════════════════════════════════════════════════════════
+       CERTIFICATE MODAL
+       openCert(cardEl) — reads data-cert image path and h4 title
+    ══════════════════════════════════════════════════════════ */
+    function openCert(cardEl) {
+      const certSrc = cardEl.dataset.cert || '';
+      const title = cardEl.querySelector('h4') ? cardEl.querySelector('h4').textContent : 'Certificate';
+
+      document.getElementById('certModalTitle').textContent = title;
+
+      const img = document.getElementById('certModalImg');
+      const placeholder = document.getElementById('certModalPlaceholder');
+
+      if (certSrc) {
+        img.src = certSrc;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+
+        img.onerror = () => {
+          img.style.display = 'none';
+          placeholder.style.display = 'flex';
+        };
+        img.onload = () => {
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        };
+      } else {
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+      }
+
+      document.getElementById('certModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertModal() {
+      document.getElementById('certModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Click backdrop to close cert modal
+    document.getElementById('certModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('certModal')) closeCertModal();
+    });
+  </script>
+
+  <!-- ============================================================
+       IMAGE GALLERY LIGHTBOX
+  ============================================================ -->
+  <div id="lightbox">
+    <div class="lb-header">
+      <span class="lb-title" id="lbTitle"></span>
+      <span class="lb-counter" id="lbCounter"></span>
+      <button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="lb-img-wrap">
+      <button class="lb-arrow lb-prev" onclick="lbMove(-1)"><i class="fas fa-chevron-left"></i></button>
+      <img id="lb-img" src="" alt="" />
+      <button class="lb-arrow lb-next" onclick="lbMove(1)"><i class="fas fa-chevron-right"></i></button>
+      <div class="lb-dots" id="lbDots"></div>
+    </div>
+    <div class="lb-thumbnails" id="lbThumbs"></div>
+  </div>
+
+  <!-- ============================================================
+       CERTIFICATE MODAL
+  ============================================================ -->
+  <div id="certModal">
+    <div class="cert-modal-header">
+      <span class="cert-modal-title" id="certModalTitle"></span>
+      <button class="cert-modal-close" onclick="closeCertModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <img id="certModalImg" src="" alt="" />
+    <div class="cert-modal-placeholder" id="certModalPlaceholder">
+      <i class="fas fa-certificate"></i>
+      <p>Certificate image not found.</p>
+      <p style="font-size:0.75rem;opacity:0.6;">Add your certificate image to the path set in <code>data-cert</code></p>
+    </div>
+  </div>
+
+</body>
+
+</html>
